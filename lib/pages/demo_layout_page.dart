@@ -82,7 +82,148 @@ class _LinearLayout extends StatelessWidget {
 class _FlexibleLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text("弹性布局"),
+      ),
+      body: Center(
+        child: Column(
+          children: [
+            Container(
+                margin: EdgeInsets.all(6.0), child: TitleText("Flex平均分配宽度")),
+            Container(
+                margin: EdgeInsets.all(6.0),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        height: 30.0,
+                        color: Colors.lightGreen,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        height: 30.0,
+                        color: Colors.cyanAccent,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        height: 30.0,
+                        color: Colors.amberAccent,
+                      ),
+                    ),
+                  ],
+                )),
+            Container(
+                margin: EdgeInsets.all(6.0),
+                child: TitleText("Flex按照3:2:1宽度分配")),
+            Container(
+                margin: EdgeInsets.all(6.0),
+                child: Flex(
+                  direction: Axis.horizontal,
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        height: 30.0,
+                        color: Colors.lightGreen,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        height: 30.0,
+                        color: Colors.cyanAccent,
+                      ),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        height: 30.0,
+                        color: Colors.amberAccent,
+                      ),
+                    ),
+                  ],
+                )),
+            Container(
+                margin: EdgeInsets.all(6.0), child: TitleText("Flex平均分配高度")),
+            Container(
+              margin: EdgeInsets.all(6.0),
+              child: Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: SizedBox(
+                      height: 90.0,
+                      child: Flex(
+                        direction: Axis.vertical,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              height: 30.0,
+                              color: Colors.lightGreen,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              height: 30.0,
+                              color: Colors.cyanAccent,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              height: 30.0,
+                              color: Colors.amberAccent,
+                            ),
+                          ),
+                        ],
+                      ))),
+            ),
+            Container(
+                margin: EdgeInsets.all(6.0),
+                child: TitleText("Flex按照3:2:1高度分配")),
+            Container(
+              margin: EdgeInsets.all(6.0),
+              child: Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: SizedBox(
+                      height: 90.0,
+                      child: Flex(
+                        direction: Axis.vertical,
+                        children: <Widget>[
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              height: 30.0,
+                              color: Colors.lightGreen,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              height: 30.0,
+                              color: Colors.cyanAccent,
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: Container(
+                              height: 30.0,
+                              color: Colors.amberAccent,
+                            ),
+                          ),
+                        ],
+                      ))),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

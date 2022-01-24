@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/widget/base_widget.dart';
 
-import 'demo_layout_page.dart';
-
 class DemoWidgetPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -30,11 +28,6 @@ class DemoWidgetPage extends StatelessWidget {
           BaseButton("Input", () {
             Navigator.push(context, new MaterialPageRoute(builder: (context) {
               return InputDemo();
-            }));
-          }),
-          BaseButton("Layout", () {
-            Navigator.push(context, new MaterialPageRoute(builder: (context) {
-              return DemoLayoutPage();
             }));
           }),
         ]),

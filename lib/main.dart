@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'pages/demo_layout_page.dart';
 import 'pages/demo_widget_page.dart';
 import 'widget/base_widget.dart';
 
@@ -89,15 +90,24 @@ class _MyHomePageState extends State<MyHomePage> {
           // axis because Columns are vertical (the cross axis would be
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[BaseButton("跳转到控件demo页面", _goDemoPage)],
+          children: <Widget>[
+            BaseButton("跳转到控件demo页面", _goWidgetPage),
+            BaseButton("跳转到布局demo页面", _goLayoutPage)
+          ],
         ),
       ),
     );
   }
 
-  void _goDemoPage() {
+  void _goWidgetPage() {
     Navigator.push(mContext, new MaterialPageRoute(builder: (context) {
       return new DemoWidgetPage();
+    }));
+  }
+
+  void _goLayoutPage() {
+    Navigator.push(mContext, new MaterialPageRoute(builder: (context) {
+      return new DemoLayoutPage();
     }));
   }
 }
