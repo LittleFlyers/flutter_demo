@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'pages/demo_scrollable_page.dart';
 import 'pages/demo_layout_page.dart';
 import 'pages/demo_widget_page.dart';
 import 'widget/base_widget.dart';
@@ -92,7 +93,8 @@ class _MyHomePageState extends State<MyHomePage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             BaseButton("跳转到控件demo页面", _goWidgetPage),
-            BaseButton("跳转到布局demo页面", _goLayoutPage)
+            BaseButton("跳转到布局demo页面", _goLayoutPage),
+            BaseButton("跳转到可滚动demo页面", _goScrollablePage)
           ],
         ),
       ),
@@ -108,6 +110,12 @@ class _MyHomePageState extends State<MyHomePage> {
   void _goLayoutPage() {
     Navigator.push(mContext, new MaterialPageRoute(builder: (context) {
       return new DemoLayoutPage();
+    }));
+  }
+
+  void _goScrollablePage() {
+    Navigator.push(mContext, new MaterialPageRoute(builder: (context) {
+      return new DemoScrollablePage();
     }));
   }
 }
