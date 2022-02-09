@@ -25,6 +25,11 @@ class DemoLayoutPage extends StatelessWidget {
               return _FlowLayoutPage();
             }));
           }),
+          BaseButton("层叠布局", () {
+            Navigator.push(context, new MaterialPageRoute(builder: (context) {
+              return _StackLayoutPage();
+            }));
+          }),
         ]),
       ),
     );
@@ -326,5 +331,27 @@ class _TestFlowDelegate extends FlowDelegate {
   @override
   getSize(BoxConstraints constraints) {
     return Size(double.infinity, 300.0);
+  }
+}
+
+class _StackLayoutPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+        appBar: AppBar(
+          title: Text("层叠布局"),
+        ),
+        body: ConstrainedBox(
+          constraints: BoxConstraints.expand(),
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(left: 15.0, child: Text("绝对定位的第一个元素")),
+              Positioned(top: 15.0, child: Text("绝对定位的第二个元素")),
+              Positioned(right: 15.0, child: Text("绝对定位的第三个元素")),
+              Positioned(bottom: 15.0, child: Text("绝对定位的第四个元素")),
+            ],
+          ),
+        ));
   }
 }
