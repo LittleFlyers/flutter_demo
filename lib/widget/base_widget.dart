@@ -55,13 +55,15 @@ class CardWidget extends StatefulWidget {
   String contentText;
   String userName;
   double width;
+  int loveCount;
   bool isLove;
 
   CardWidget(this._imagePath,
       {this.contentText = "默认",
       this.width = 200.0,
       this.userName,
-      this.isLove = false}) {
+      this.isLove = false,
+      this.loveCount = 0}) {
     if (isLove) {
       _loveImagePath = "assets/full_love.png";
     } else {
@@ -141,7 +143,7 @@ class _CardWidgetState extends State<CardWidget> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           Text(
-                            "123",
+                            widget.loveCount.toString(),
                             style: TextStyle(fontSize: 13.0),
                           ),
                           InkWell(
