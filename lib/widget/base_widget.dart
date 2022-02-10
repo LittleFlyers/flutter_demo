@@ -51,10 +51,23 @@ class TitleText extends Text {
 
 class CardWidget extends StatefulWidget {
   String _imagePath;
+  String _loveImagePath;
   String contentText;
+  String userName;
   double width;
+  bool isLove;
 
-  CardWidget(this._imagePath, {this.contentText = "默认", this.width = 200.0});
+  CardWidget(this._imagePath,
+      {this.contentText = "默认",
+      this.width = 200.0,
+      this.userName,
+      this.isLove = false}) {
+    if (isLove) {
+      _loveImagePath = "assets/full_love.png";
+    } else {
+      _loveImagePath = "assets/love.png";
+    }
+  }
 
   @override
   State<StatefulWidget> createState() {
@@ -88,20 +101,80 @@ class _CardWidgetState extends State<CardWidget> {
               ),
             ),
           ),
-          Row(
-            children: [
-              Container(
-                  alignment: Alignment.topLeft,
-                  margin: EdgeInsets.only(left: 10),
-                  child: Row(
-                    children: [
-
-                    ],
-                  )),
-            ],
+          Container(
+            height: 20.0,
+            child: Flex(
+              direction: Axis.horizontal,
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                      alignment: Alignment.topLeft,
+                      margin: EdgeInsets.only(left: 10),
+                      // color: Colors.lightGreen,
+                      child: Row(
+                        children: [
+                          Card(
+                            shape: RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadiusDirectional.circular(50)),
+                            clipBehavior: Clip.antiAlias,
+                            child: Image.network(
+                              widget._imagePath,
+                            ),
+                          ),
+                          Text(
+                            widget.userName,
+                            style: TextStyle(
+                                fontSize: 12.0, color: Colors.black26),
+                          )
+                        ],
+                      )),
+                ),
+                Expanded(
+                    flex: 1,
+                    child: Container(
+                      // color: Colors.cyanAccent,
+                      /*alignment: Alignment.centerRight,
+                      margin: EdgeInsets.only(right: 10),*/
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            "123",
+                            style: TextStyle(fontSize: 13.0),
+                          ),
+                          InkWell(
+                            onTap: _love,
+                            highlightColor: Colors.transparent,
+                            splashColor: Colors.transparent,
+                            child: Image.asset(
+                              widget._loveImagePath,
+                              width: 17.0,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )),
+              ],
+            ),
           )
         ],
       ),
     );
+  }
+
+  void _love() {
+    if (widget.isLove) {
+      widget.isLove = false;
+      setState(() {
+        widget._loveImagePath = "assets/love.png";
+      });
+    } else {
+      widget.isLove = true;
+      setState(() {
+        widget._loveImagePath = "assets/full_love.png";
+      });
+    }
   }
 }
