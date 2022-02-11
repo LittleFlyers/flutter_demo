@@ -34,7 +34,7 @@ class _SingleChildScrollState extends State<_SingleChildScrollPage> {
   List<CardWidget> _cards;
 
   _SingleChildScrollState() {
-    _cards = CardFactory().createCards(200.0);
+    _cards = CardFactory().createCards(200.0, 32);
   }
 
   @override
