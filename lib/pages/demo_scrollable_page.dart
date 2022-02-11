@@ -16,6 +16,11 @@ class DemoScrollablePage extends StatelessWidget {
               return _SingleChildScrollPage();
             }));
           }),
+          BaseButton("ListView", () {
+            Navigator.push(context, new MaterialPageRoute(builder: (context) {
+              return _ListViewPage();
+            }));
+          }),
         ]),
       ),
     );
@@ -62,9 +67,41 @@ class _ListViewPage extends StatefulWidget {
 }
 
 class _ListViewState extends State<_ListViewPage> {
+  List<Widget> _cards = <Widget>[
+    Container(
+        padding: const EdgeInsets.all(16.0),
+        alignment: Alignment.center,
+        child: SizedBox(
+            width: 24.0,
+            height: 24.0,
+            child: CircularProgressIndicator(strokeWidth: 2.0)))
+  ];
+  CardFactory _cardFactory = CardFactory();
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    throw UnimplementedError();
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("ListView"),
+        ),
+        body: Container(
+          child: ListView.builder(
+            itemCount: _cards.length,
+            itemBuilder: (BuildContext context, int index) {
+              if (_cards[index] is Container) {
+                _refreshData();
+              }
+              return _cards[index];
+            },
+          ),
+        ));
+  }
+
+  //模拟加载，每次加载8张卡片
+  void _refreshData() {
+    Future.delayed(Duration(seconds: 1)).then((e) {
+      _cards.insertAll(_cards.length - 1, _cardFactory.createCards(200.0, 8));
+      setState(() {});
+    });
   }
 }
