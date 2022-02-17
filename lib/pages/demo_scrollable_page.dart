@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_demo/data/data_factory.dart';
 import 'package:flutter_demo/widget/base_widget.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:flutter_staggered_grid_view/src/widgets/masonry_grid_view.dart';
 
 class DemoScrollablePage extends StatelessWidget {
   @override
@@ -24,6 +26,11 @@ class DemoScrollablePage extends StatelessWidget {
           BaseButton("GridView", () {
             Navigator.push(context, new MaterialPageRoute(builder: (context) {
               return _GridViewPage();
+            }));
+          }),
+          BaseButton("瀑布流", () {
+            Navigator.push(context, new MaterialPageRoute(builder: (context) {
+              return _FallsFlowPage();
             }));
           }),
         ]),
@@ -128,7 +135,6 @@ class _GridViewState extends State<_GridViewPage> {
             height: 24.0,
             child: CircularProgressIndicator(strokeWidth: 2.0)))
   ];
-  CardFactory _cardFactory = CardFactory();
 
   @override
   Widget build(BuildContext context) {
@@ -220,6 +226,59 @@ class _GridViewState extends State<_GridViewPage> {
           color: Colors.white,
         ),
       ]);
+      setState(() {});
+    });
+  }
+}
+
+class _FallsFlowPage extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return _FallsFlowState();
+  }
+}
+
+class _FallsFlowState extends State<_FallsFlowPage> {
+  List<Widget> _cards = <Widget>[
+    Container(
+        padding: const EdgeInsets.all(16.0),
+        alignment: Alignment.center,
+        child: SizedBox(
+            width: 24.0,
+            height: 24.0,
+            child: CircularProgressIndicator(strokeWidth: 2.0)))
+  ];
+  CardFactory _cardFactory = CardFactory();
+
+  _FallsFlowState() {
+    _refreshData();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    print(_cards.length);
+    return Scaffold(
+        appBar: AppBar(
+          title: Text("瀑布流"),
+        ),
+        body: MasonryGridView.count(
+          crossAxisCount: 2,
+          mainAxisSpacing: 1,
+          crossAxisSpacing: 1,
+          itemCount: _cards.length,
+          itemBuilder: (context, index) {
+            if (_cards[index] is Container) {
+              _refreshData();
+            }
+            return _cards[index];
+          },
+        ));
+  }
+
+  //模拟加载，每次加载8张卡片
+  void _refreshData() {
+    Future.delayed(Duration(seconds: 1)).then((e) {
+      _cards.insertAll(_cards.length - 1, _cardFactory.createCards(200.0, 8));
       setState(() {});
     });
   }
